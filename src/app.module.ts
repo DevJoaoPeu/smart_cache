@@ -7,9 +7,11 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { Keyv } from 'keyv';
 import { CacheableMemory } from 'cacheable';
 import { createKeyv } from '@keyv/redis';
+import { ProceduresEntity } from './entity/procedure.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([ProceduresEntity]),
     CacheModule.registerAsync({
       useFactory: async () => {
         return {
@@ -36,7 +38,7 @@ import { createKeyv } from '@keyv/redis';
         username: configService.get<string>('POSTGRES_USER'),
         password: configService.get<string>('POSTGRES_PASSWORD'),
         database: configService.get<string>('POSTGRES_DATABASE'),
-        entities: [],
+        entities: [ProceduresEntity],
         synchronize: true,
       }),
     }),
