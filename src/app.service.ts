@@ -26,7 +26,17 @@ export class AppService {
 
   async getProcedure(): Promise<ProceduresEntity[]> {
     return await this.procedureRepository.find({
+      where: { active: true },
       select: ['id', 'name', 'createdAt', 'active'],
     });
+  }
+
+  inactivateProcedure(id: number): ICreatedProcedure {
+    this.procedureRepository.update({ id }, { active: false });
+
+    return {
+      status: HttpStatus.OK,
+      message: 'Procedure inactivate successfully',
+    }
   }
 }

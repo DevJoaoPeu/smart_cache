@@ -1,11 +1,18 @@
 # get all procedures
 GET http://localhost:3000/procedure/get
-###
 
-# create procedures
+### create procedures
 POST http://localhost:3000/procedure/create
 Content-Type: application/json
 
 {
-    "name": "HEMODIALISE"
+    "name": "HEMODIALISE 3"
+}
+
+### inactivate procedures
+PATCH  http://localhost:3000/procedure/inactivate
+Content-Type: application/json
+
+{
+    "id": 5
 }

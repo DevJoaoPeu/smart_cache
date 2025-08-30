@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateProcedureDto } from './dto/create-procedure.dto';
 import { ProceduresEntity } from './entity/procedure.entity';
 import type { ICreatedProcedure } from './interface/created-procedure.interface';
+import type { InactivateProcedure } from './interface/inactivate-procedure.interface';
 
 @Controller('procedure')
 export class AppController {
@@ -16,5 +17,10 @@ export class AppController {
   @Get('get')
   async getProcedure(): Promise<ProceduresEntity[]> {
    return await this.appService.getProcedure();
+  }
+
+  @Patch('inactivate')
+  inactivateProcedure(@Body() { id }: InactivateProcedure): ICreatedProcedure {
+   return this.appService.inactivateProcedure(id);
   }
 }
