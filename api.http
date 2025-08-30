@@ -1,0 +1,7 @@
+# create procedures
+POST http://localhost:3000/procedure/create
+Content-Type: application/json
+
+{
+    "name": "HEMODIALISE"
+}

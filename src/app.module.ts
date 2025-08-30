@@ -11,7 +11,6 @@ import { ProceduresEntity } from './entity/procedure.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProceduresEntity]),
     CacheModule.registerAsync({
       useFactory: async () => {
         return {
@@ -38,10 +37,11 @@ import { ProceduresEntity } from './entity/procedure.entity';
         username: configService.get<string>('POSTGRES_USER'),
         password: configService.get<string>('POSTGRES_PASSWORD'),
         database: configService.get<string>('POSTGRES_DATABASE'),
-        entities: [ProceduresEntity],
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
       }),
     }),
+    TypeOrmModule.forFeature([ProceduresEntity]),
   ],
   controllers: [AppController],
   providers: [AppService],

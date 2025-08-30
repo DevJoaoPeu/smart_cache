@@ -3,7 +3,7 @@ import { AppService } from './app.service';
 import { CreateProcedureDto } from './dto/create-procedure.dto';
 import { ProceduresEntity } from './entity/procedure.entity';
 
-@Controller('products')
+@Controller('procedure')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 

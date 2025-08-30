@@ -9,8 +9,10 @@ export class AppService {
   @Inject(CACHE_MANAGER) 
   private cacheManager: Cache;
 
-  @InjectRepository(ProceduresEntity) 
-  private readonly procedureRepository: Repository<ProceduresEntity>;
+  constructor(
+    @InjectRepository(ProceduresEntity) 
+    private readonly procedureRepository: Repository<ProceduresEntity>
+  ) {}
 
   createProcedure(name: string): void {
     this.procedureRepository.save({ name });
