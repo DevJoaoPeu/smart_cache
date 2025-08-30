@@ -1,8 +1,9 @@
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProceduresEntity } from './entity/procedure.entity';
 import { Repository } from 'typeorm';
+import { ICreatedProcedure } from './interface/created-procedure.interface';
 
 @Injectable()
 export class AppService {
@@ -14,8 +15,13 @@ export class AppService {
     private readonly procedureRepository: Repository<ProceduresEntity>
   ) {}
 
-  createProcedure(name: string): void {
+  createProcedure(name: string): ICreatedProcedure {
     this.procedureRepository.save({ name });
+
+    return {
+      status: HttpStatus.CREATED,
+      message: 'Procedure created successfully',
+    }
   }
 
   async getProcedure(): Promise<ProceduresEntity[]> {
