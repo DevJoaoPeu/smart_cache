@@ -25,6 +25,8 @@ export class AppService {
   }
 
   async getProcedure(): Promise<ProceduresEntity[]> {
-    return await this.procedureRepository.find();
+    return await this.procedureRepository.find({
+      select: ['id', 'name', 'createdAt', 'active'],
+    });
   }
 }
