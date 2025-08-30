@@ -1,3 +1,7 @@
+# get all procedures
+GET http://localhost:3000/procedure/get
+###
+
 # create procedures
 POST http://localhost:3000/procedure/create
 Content-Type: application/json
