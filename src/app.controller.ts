@@ -1,12 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Product } from './product.entity';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('products')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  findAll(): Promise<Product[]> {
+    return this.appService.findAll();
+  }
+
+  @Post()
+  create(@Body() product: Partial<Product>): Promise<Product> {
+    return this.appService.create(product);
   }
 }
