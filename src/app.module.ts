@@ -21,6 +21,9 @@ import { Product } from './product.entity';
         username: configService.get<string>('POSTGRES_USER'),
         password: configService.get<string>('POSTGRES_PASSWORD'),
         database: configService.get<string>('POSTGRES_DATABASE'),
+        ssl: {
+          rejectUnauthorized: false // funciona para testes
+        },
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
       }),
